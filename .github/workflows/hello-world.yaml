@@ -1,21 +1,13 @@
-# .github/workflows/hello-world.yml
-name: Hello World Workflow
+# .github/workflows/main.yml
+name: Run Reusable Hello World Workflow
 
 on:
-  workflow_call:
-    inputs:
-      script_path:
-        description: 'Path to the hello world script'
-        required: true
-        default: './main.py'
+  push:
+    branches:
+      - main
 
 jobs:
-  hello-world-job:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Run Hello World Script
-        run: python ${{ inputs.script_path }}
+  call-hello-world:
+    uses: githubactions2-16-WorkFlows/.github/workflows/hello-world.yml@main
+    with:
+      script_path: './hello.sh'
