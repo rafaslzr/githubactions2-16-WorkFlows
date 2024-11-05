@@ -1,0 +1,21 @@
+# .github/workflows/hello-world.yml
+name: Hello World Workflow
+
+on:
+  workflow_call:
+    inputs:
+      script_path:
+        description: 'Path to the hello world script'
+        required: true
+        default: './main.py'
+
+jobs:
+  hello-world-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Run Hello World Script
+        run: python ${{ inputs.script_path }}
